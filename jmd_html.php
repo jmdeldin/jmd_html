@@ -1,11 +1,12 @@
 <?php
+$plugin = array(
+    'description' => 'Converts XHTML to HTML.',
+    'type' => 0,
+    'version' => '0.3',
+);
 
-$plugin['version'] = '0.2';
-$plugin['author'] = 'Jon-Michael Deldin';
-$plugin['author_uri'] = 'http://jmdeldin.com/';
-$plugin['description'] = 'Converts XHTML to HTML.';
 
-if (!defined('txpinterface')) @include_once '../../jmd-plugins/zem_tpl.php';
+if (!defined('txpinterface')) @include_once '../zem_tpl.php';
 
 if (0) {
 ?>
@@ -19,14 +20,22 @@ Simply enable the plugin to convert XHTML to HTML. Converts both @/>@ and @ />@ 
 
 # --- BEGIN PLUGIN CODE ---
 
-// convert '/>' to '>'
-function jmd_html($doc)
+if (txpinterface === 'public')
 {
-	$out = str_replace(' >', '>', str_replace('/>', '>', $doc));
-	return $out;
+    ob_start('jmd_html');
 }
-ob_start('jmd_html');
+
+/**
+ * Converts XHTML ('/>') to HTML.
+ * 
+ * @param string $buffer
+ */
+function jmd_html($buffer)
+{
+    $out = str_replace(' >', '>', str_replace('/>', '>', $buffer));
+
+    return $out;
+}
 
 # --- END PLUGIN CODE ---
-
 ?>
