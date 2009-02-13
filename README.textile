@@ -1,0 +1,4 @@
+h1. jmd_html
+
+Enable the plugin to convert XHTML to HTML. Converts both @/>@ and @ />@ closures to @>@.
+
