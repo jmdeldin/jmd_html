@@ -19,6 +19,6 @@ if (txpinterface === 'public')
  */
 function jmd_html($buffer)
 {
-    return preg_replace('/(\s+)?\/>/', '>', $buffer);
+    return preg_replace('/\s*\/>/', '>', $buffer);
 }
 
